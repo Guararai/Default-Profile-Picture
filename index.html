@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Picture</title>
+
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .profilePicture {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            width: 80px;
+            height: 80px;
+            border-radius: 6px;
+            margin-top: 20px;
+        }
+
+        #initials {
+            color: #222222;
+            font-weight: 500;
+            font-size: 24px;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+
+        input,
+        button {
+            margin: 5px;
+            padding: 8px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="text" placeholder="Name" id="name">
+    <input type="text" placeholder="Last Name" id="lastName">
+    <button id="submit">Submit</button>
+    <div id="profilePicture" class="profilePicture">
+        <h1 id="initials"></h1>
+    </div>
+    <script>
+        let firstName;
+        let lastName;
+
+        document.getElementById("submit").addEventListener('click', function () {
+            firstName = document.getElementById("name").value.trim();
+            lastName = document.getElementById("lastName").value.trim();
+
+            const nameRegex = /^[a-zA-ZÀ-ÖØ-öø-ÿ\s]{2,30}$/;
+
+            if (!firstName || !lastName) {
+                alert("Please fill in all fields");
+                return;
+            }
+
+            if (!nameRegex.test(firstName) || !nameRegex.test(lastName)) {
+                alert("Names must contain only letters and be between 2 and 30 characters long");
+                document.getElementById("name").value = "";
+                document.getElementById("lastName").value = "";
+                return;
+            }
+
+            let profilePicture = firstName[0].toUpperCase() + lastName[0].toUpperCase();
+
+            console.log(profilePicture);
+
+            document.getElementById("initials").textContent = profilePicture;
+            document.getElementById("profilePicture").style.backgroundColor = "#d0e2ff";
+        });
+    </script>
+</body>
+
+</html>
